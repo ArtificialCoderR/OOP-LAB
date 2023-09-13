@@ -1,0 +1,85 @@
+import java.util.Scanner;
+
+public class EMPLOYEE {
+    String EName,Email;
+    int Eid;
+    double Basic,DA,Gross_Sal,Net_Sal,IT;
+    EMPLOYEE(){
+        this.read();
+    }
+   // EMPLOYEE(String name,int ID,double salary){
+       // this.Eid = ID;
+       // this.EName = name;
+      //  this.Basic= salary;
+      //  this.compute_next_sal();
+    //    this.display();
+   //}
+    public void read(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Employee Name: ");
+        EName=sc.nextLine();
+        this.formatEmployeeName();
+        System.out.println("------------------------");
+        System.out.println("Enter Employee ID: ");
+        Eid=sc.nextInt();
+        System.out.println("------------------------");
+        System.out.println("Enter Basic Salary: ");
+        Basic=sc.nextDouble();
+        System.out.println("------------------------");
+        sc.close();
+        }
+    public void compute_next_sal(){
+        DA=0.52*Basic;
+        Gross_Sal=Basic+DA;
+        IT=0.3*Gross_Sal;
+        Net_Sal= Gross_Sal -IT;
+    }
+    public void generate_email(char [] a,int ind){
+        char [] emailtemp = new char[(a.length-(ind-1))];
+        emailtemp[0] =a [0];
+        int j =1;
+        for(int i = ind;i<a.length;i++){
+            char temp  = a[i];
+            emailtemp[j] = temp;
+            j++;
+        }
+        this.Email = new String(emailtemp);
+        this.Email += "@example.com";
+
+    }
+    public void formatEmployeeName(){
+        String test =this.EName.toLowerCase();
+        int ind = (test.indexOf(" "))+1;
+        char [] name;
+        name = test.toCharArray();
+        this.generate_email(name,ind);
+        name [0] -=32;
+        name [ind] -= 32;
+        this.EName = new String(name);
+    }
+
+    public void display(){
+        System.out.println("Details Of Employee -"+EName);
+        System.out.println("------------------------");
+        System.out.println("Employee ID: "+Eid);
+        System.out.println("------------------------");
+        System.out.println("Employee Email: "+Email);
+        System.out.println("------------------------");
+        System.out.println("Breakdown Of Income: ");
+        System.out.println("------------------------");
+        System.out.println("Basic Salary = "+Basic);
+        System.out.println("------------------------");
+        System.out.println("Dearness Allowance = "+DA);
+        System.out.println("------------------------");
+        System.out.println("Gross Salary ="+Gross_Sal);
+        System.out.println("------------------------");
+        System.out.println("Income Tax = "+IT);
+        System.out.println("------------------------");
+        System.out.println("Net Income= "+Net_Sal);
+    }
+    public static void main(String [] args){
+        EMPLOYEE emp1 = new EMPLOYEE();
+        emp1.compute_next_sal();
+        emp1.display();
+    }
+}
