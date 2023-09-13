@@ -1,0 +1,94 @@
+import java.util.Scanner;
+import java.lang.*;
+public class STUDENT {
+    String name, initial;
+    int[] marks = new int[5];
+    int total, average, n = 5;
+    static int no;
+    public static STUDENT[] students;
+    static Scanner sc = new Scanner(System.in);
+    STUDENT() {
+        this.assign();
+        this.extract();
+        this.compute();
+        this.display();
+    }
+
+
+    public void assign() {
+        sc.nextLine();
+        System.out.println("Enter Student Name: ");
+        this.name = sc.nextLine();
+        this.removeWhitespace();
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter the Marks for Subject." + (i + 1) + ": ");
+            marks[i] = sc.nextInt();
+        }
+
+    }
+
+    public void extract() {
+        char[] init = new char[2];
+        String temp = name.toUpperCase();
+        int ind = temp.indexOf(" ");
+        init[0] = temp.charAt(0);
+        init[1] = temp.charAt((ind + 1));
+        this.initial = new String(init);
+    }
+public void removeWhitespace() {
+    String test =this.name.toLowerCase();
+    int ind = (test.indexOf(" "))+1;
+    int ind2 = test.indexOf(" ");
+    char [] name;
+    char [] name2 = new char[test.length()];
+    name = test.toCharArray();
+    name [0] -=32;
+    name [ind] -= 32;
+    for (int i = 0; i <ind2 ; i++) {
+        name2[i] = name[i];
+    }
+    for (int i = ind; i < test.length() ; i++) {
+        name2[i] = name [i];
+    }
+    for (int i = ind; i < test.length() ; i++) {
+        char temp = name [i];
+        name2 [i] = temp;
+
+    }
+    this.name = new String(name2);
+    }
+public void display() {
+       System.out.println("Student Name: \n" + this.name);
+        System.out.println("---------------\n");
+        System.out.println("Student Initials: \n" + this.initial);
+        System.out.println("---------------\n");
+        System.out.println("No. Of Subjects Attempted: \n" + this.n);
+        System.out.println("--------------------------\n");
+        for (int i = 0; i < n; i++) {
+            System.out.println("----------------\n");
+            System.out.println("The Marks for Subject." + (i + 1) + ": " + this.marks[i]);
+        }
+        System.out.println("Average = " + this.average);
+        System.out.println("--------------");
+        System.out.println("Total = " + this.total + "/500");
+    }
+
+    public void compute() {
+        this.total = 0;
+        for (int i = 0; i < n; i++) {
+            this.total += this.marks[i];
+        }
+        this.average = this.total / n;
+
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Enter Number Of Students: ");
+        no = sc.nextInt();
+        sc.nextLine();
+        students = new STUDENT[no];
+        for (int i = 0; i < no; i++) {
+            students[i] = new STUDENT();
+        }
+    }
+}
