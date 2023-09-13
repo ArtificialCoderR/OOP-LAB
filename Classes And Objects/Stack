@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+public class Stack {
+    int tos;
+    int [] stack= new int [10];
+    int top =-1;
+    static Scanner sc = new Scanner(System.in);
+    public void push(int num){
+        if (top==stack.length-1){
+            System.out.println("Overflow!");
+        }
+        else{
+            stack[++top]=num;
+            tos =stack[top];
+        }
+
+    }
+    public void pop(){
+        if(top == -1){
+            System.out.println("Underflow!");
+        }
+        else {
+            System.out.println(" "+tos+ " Was Popped from stack");
+            --top;
+            tos = stack[top];
+        }
+
+    }
+    public void display(){
+        int i;
+        if(top == -1){
+            System.out.println("Null Stack\n");
+        }
+        System.out.println("\t TOP \t");
+        for(i=top;i>=0;i--){
+            System.out.println("| \t"+stack[i]+"\t|");
+        }
+
+    }
+    public  static void main(String [] args){
+        Stack st = new Stack();
+        while (true){
+            int ch,num;
+            System.out.println("\tPossible Operations: ");
+            System.out.print("\n 1. Push \n 2. Pop \n 3. Display \n 4. Exit");
+            ch = sc.nextInt();
+            switch (ch) {
+                case 1 -> {
+                    System.out.println("Enter Number to be pushed: ");
+                    num = sc.nextInt();
+                    st.push(num);
+                }
+                case 2 -> st.pop();
+                case 3 -> st.display();
+                case 4 -> {
+                    return;
+                }
+                default -> System.out.println("Invalid");
+            }
+
+        }
+    }
+}
