@@ -1,0 +1,50 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Mixer {
+    int[] arr;
+    int[] mixed;
+    Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] Ar) {
+        Mixer m1 = new Mixer();Mixer m2 =   new Mixer();
+        m1.accept();
+        m2.accept();
+        m1.mix(m2);
+    }
+
+    public void accept() {
+        int temp;
+        int n;
+        System.out.println("Enter number of elements of Object " + (this));
+        n = sc.nextInt();
+        this.arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter Element." + (i + 1));
+            arr[i] = sc.nextInt();
+
+        }
+        Arrays.sort(this.arr);
+    }
+
+    public void mix(Mixer m) {
+        int size = m.arr.length + this.arr.length;
+        mixed = new int[size];
+        for (int i = 0; i < (m.arr.length); i++) {
+            int temp = m.arr[i];
+            mixed[i] = temp;
+        }
+        int i =0;
+        for (int j = size - 1; j >= m.arr.length; j--) {
+            mixed[j] = this.arr[i++];
+
+        }
+
+        Arrays.sort(mixed);
+        System.out.print("The Mixed Array is : |");
+        for (int ele : mixed) {
+            System.out.print(ele+"|");
+        }
+    }
+}
+
