@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+public class College_Student {
+    static College_Student [] stud;
+    int reg_no, stud_no;
+    String name;
+    short Semester;
+    float GPA, CGPA;
+    String date;
+    static Scanner sc = new Scanner(System.in);
+
+    College_Student() {
+        stud_no++;
+        this.assign();
+    }
+    College_Student(String sname,short Sem,int reg,float gpa){
+        stud_no++;
+        this.name = sname;
+        this.Semester = Sem;
+        this.reg_no = reg;
+        this.GPA = gpa;
+    }
+    public void assign()
+    {
+        sc.nextLine();
+        System.out.println("Enter Student Name: ");
+        name = sc.nextLine();
+        System.out.println("Enter Current Semester: ");
+        Semester = sc.nextShort();
+        System.out.println("Enter Date Of Joining (DD-MM-YYYY): ");
+        date = sc.next();
+        this.setReg_no();
+        System.out.println("Enter GPA of Semester-"+Semester+": ");
+        GPA = sc.nextFloat();
+        if(GPA>5.0){
+            System.out.println("Enter GPA (range of 0-5) of Semester-"+Semester+": ");
+            GPA = sc.nextFloat();
+        }
+
+    }
+    public void setReg_no(){
+        char [] temp = date.toCharArray();
+        reg_no = (temp[8]-'0')*1000+(temp[9]-'0')*100+stud_no;
+    }
+    public static void main(String[] args){
+        System.out.println("Enter Number Of Student Records: ");
+        int i = sc.nextInt();
+        if(i<5){
+            System.out.println("Enter Number Of Student Records Greater Than %: ");
+            i = sc.nextInt();
+        }
+        stud = new College_Student[i];
+        for (College_Student s:stud){
+            s = new College_Student();
+        }
+    }
+}
